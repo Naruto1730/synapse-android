@@ -1,0 +1,10 @@
+{
+  "latestVersionCode": 10,
+  "latestVersionName": "1.0.0-alpha04",
+  "packageName": "com.synapse.social.studioasinc",
+  "updateTitle": "Synapse Update (v1.0.0-alpha04)",
+  "updateDescription": "We're improving the app with new features, improvements, and bug fixes with each release.\n\nSee what's new:\n• Crash fix while opening comments, editing messages\n• Refactored codebase\n• New Material 3 icons\n• Dynamic app icon\n• Color fixes\n• Dark mode implementation (partial)\n• Reverted to Material 2 switches\n• Updated dependencies\n• Fixed clutter when opening new activities\n• New loading animation\n• Offline caching (beta, needs optimization)\n• Bug fixes & UI/UX improvements",
+  "downloadUrl": "https://github.com/YOUR_USERNAME/YOUR_REPO/releases/download/v1.0.0-alpha04/app-release.apk",
+  "minRequiredVersion": 3,
+  "forceUpdate": false
+}
