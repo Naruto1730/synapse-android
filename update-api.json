@@ -1,0 +1,8 @@
+{
+  "versionCode": 11,
+  "versionName": "1.1.0 alpha04",
+  "title": "New Update Available!",
+  "updateLink": "https://play.google.com/store/apps/details?id=com.teraPlayrobin",
+  "isCancelable": true,
+  "whatsNew": "• Added Direct Download Option!\\n• Fixed video loading and buffering issues.\\n• Upgraded to a new, faster API for performance."
+}
