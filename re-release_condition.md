@@ -16,7 +16,7 @@ By publishing, modifying, or redistributing this project, you agree to the follo
 - You may publish under your own name/organization if preferred.  
 
 ### **4. License Compliance**  
-- This project is licensed under the **[specify exact license, e.g., MIT, GPL, or "Code of Conduct"]**.  
+- This project is licensed under the **MIT**.  
 - Any redistribution must include the **original license file** and copyright notice.  
 
 ### **5. Play Store Publishing**  
