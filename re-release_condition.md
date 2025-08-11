@@ -19,7 +19,7 @@
 - **Use commercially** (e.g., enterprise SaaS) without a separate license.  
 
 ### **4. Compliance Requirements**  
-- **License:** Include original [MIT License](LICENSE) and copyright notice.  
+- **License:** Include original [MIT License](https://github.com/StudioAsInc/synapse-android/blob/main/LICENCE.md) and copyright notice.  
 - **Security:** Modifications must not introduce vulnerabilities (audits may be requested).  
 - **Branding:** Avoid implying StudioAs Inc. endorsement.  
 
