@@ -34,7 +34,7 @@
    - Using StudioAs Inc. trademarks, logos, or branding without written consent.  
 
 3.2 **Conditional Restrictions:**  
-   - **Backend Modifications:** Require pre-approval via [contact email].  
+   - **Backend Modifications:** Require pre-approval via [mashikahamed0@gmail.com].  
    - **Credit Attribution:** Mandatory inclusion of:  
      *"Derived from Synapse by StudioAs Inc."* in app metadata.  
 
