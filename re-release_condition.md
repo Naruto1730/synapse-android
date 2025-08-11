@@ -1,39 +1,78 @@
-# Synapse Re-release Conditions  
-*Effective: 10/08/2025*  
-
-### **1. Definitions**  
-- **"Derivative Work"**: Any modification, fork, or integration exceeding 20% of original code.  
-- **"Major Update"**: UI/UX changes, backend alterations, or feature additions requiring approval.  
-
-### **2. Permissions**  
-✅ **You May:**  
-- Fork, modify, and redistribute the **open-source** code.  
-- Publish on app stores (e.g., Google Play) under your account.  
-- Monetize *if* core functionality remains intact (no paywalled essentials).  
-
-### **3. Restrictions**  
-🚫 **You Must Not:**  
-- **Claim ownership** of Synapse or use StudioAs Inc. trademarks/logo without permission.  
-- **Modify backend systems** or push Major Updates without prior written approval.  
-- **Add credit screens** (optional: include *"Based on Synapse by StudioAs Inc."* in descriptions).  
-- **Use commercially** (e.g., enterprise SaaS) without a separate license.  
-
-### **4. Compliance Requirements**  
-- **License:** Include original [MIT License](https://github.com/StudioAsInc/synapse-android/blob/main/LICENCE.md) and copyright notice.  
-- **Security:** Modifications must not introduce vulnerabilities (audits may be requested).  
-- **Branding:** Avoid implying StudioAs Inc. endorsement.  
-
-### **5. Violations & Enforcement**  
-- **First offense:** 30-day notice to rectify.  
-- **Repeat violations:** DMCA takedown and legal action.  
-- **Disputes:** Email [mashikahamed0@gmail.com](mailto:mashikahamed0@gmail.com) for arbitration.  
-
-### **6. StudioAs Inc. Rights**  
-- Terminate permissions **with 30 days’ notice** for any reason.  
-- Change license terms **retroactively** (users must comply within 60 days).  
+# **SYNAPSE RE-RELEASE CONDITIONS**  
+**Effective:** August 11, 2025  
+**Copyright Holder:** StudioAs Inc.  
+**Legal Contact:** [mashikahamed0@gmail.com](mailto:mashikahamed0@gmail.com)  
 
 ---
 
-**By redistributing Synapse, you agree to these terms.**  
-**Original Developer:** Ashik / StudioAs Inc.  
+### **1. DEFINITIONS**  
+1.1 **"Derivative Work"**  
+   - Any modification, fork, or integration altering ≥20% of original codebase.  
+   - Includes UI/UX changes, API modifications, or feature additions.  
+
+1.2 **"Major Update"**  
+   - Structural backend alterations.  
+   - Core functionality modifications.  
+   - Introduction of monetization systems.  
+
+---
+
+### **2. PERMITTED USE**  
+2.1 **Authorized Actions:**  
+   - Forking and modifying **current open-source** iterations.  
+   - Redistribution via app stores (e.g., Google Play, APK mirrors).  
+
+2.2 **Commercialization:**  
+   - Limited monetization permitted (ads, donations).  
+   - Prohibited: Paywalling essential features (e.g., messaging, content access).  
+
+---
+
+### **3. RESTRICTIONS**  
+3.1 **Absolute Prohibitions:**  
+   - Claiming ownership or misrepresenting affiliation with StudioAs Inc.  
+   - Using StudioAs Inc. trademarks, logos, or branding without written consent.  
+
+3.2 **Conditional Restrictions:**  
+   - **Backend Modifications:** Require pre-approval via [contact email].  
+   - **Credit Attribution:** Mandatory inclusion of:  
+     *"Derived from Synapse by StudioAs Inc."* in app metadata.  
+
+---
+
+### **4. COMPLIANCE REQUIREMENTS**  
+4.1 **Documentation:**  
+   - Retain original [MIT License](https://github.com/StudioAsInc/synapse-android/blob/main/LICENCE.md) and copyright notices.  
+
+4.2 **Security Standards:**  
+   - Third-party code integrations must pass vulnerability audits upon request.  
+
+4.3 **Branding Guidelines:**  
+   - No implied endorsement (e.g., "Official Synapse Partner" disallowed).  
+
+---
+
+### **5. ENFORCEMENT**  
+5.1 **Violation Protocol:**  
+   - **First Notice:** 30-day cure period.  
+   - **Unresolved:** DMCA takedown + litigation for damages.  
+
+5.2 **Dispute Resolution:**  
+   - Arbitration via email contact within 14 business days.  
+
+---
+
+### **6. RIGHTS RESERVED**  
+6.1 **Termination:**  
+   - StudioAs Inc. may revoke redistribution rights with 30-day notice.  
+
+6.2 **Retroactive Changes:**  
+   - License terms may be amended; redistributors have 60 days to comply.  
+
+---
+
+**ACCEPTANCE CLAUSE**  
+By redistributing Synapse, you affirm understanding of and compliance with these terms.  
+
+**Developer:** Ashik | **Entity:** StudioAs Inc.  
 **Contact:** [mashikahamed0@gmail.com](mailto:mashikahamed0@gmail.com)
