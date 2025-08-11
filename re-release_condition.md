@@ -1,37 +1,39 @@
-# **Re-release Conditions**  
+# Synapse Re-release Conditions  
+*Effective: 10/08/2025*  
 
-By publishing, modifying, or redistributing this project, you agree to the following terms:  
+### **1. Definitions**  
+- **"Derivative Work"**: Any modification, fork, or integration exceeding 20% of original code.  
+- **"Major Update"**: UI/UX changes, backend alterations, or feature additions requiring approval.  
 
-### **1. Open-Source Requirement**  
-- The project **must remain open-source** (e.g., hosted on GitHub/GitLab).  
-- Any forks or derivatives must comply with the original license.  
+### **2. Permissions**  
+✅ **You May:**  
+- Fork, modify, and redistribute the **open-source** code.  
+- Publish on app stores (e.g., Google Play) under your account.  
+- Monetize *if* core functionality remains intact (no paywalled essentials).  
 
-### **2. Update & Modification Control**  
-- **No UI/UX or major code updates** can be pushed without **explicit approval** from the original developer.  
-- The **backend must remain under the original developer's control** (no unauthorized server changes).  
+### **3. Restrictions**  
+🚫 **You Must Not:**  
+- **Claim ownership** of Synapse or use StudioAs Inc. trademarks/logo without permission.  
+- **Modify backend systems** or push Major Updates without prior written approval.  
+- **Add credit screens** (optional: include *"Based on Synapse by StudioAs Inc."* in descriptions).  
+- **Use commercially** (e.g., enterprise SaaS) without a separate license.  
 
-### **3. Attribution & Branding**  
-- The app **must not** include an "About Developers" or credits screen.  
-- Recommended (but not mandatory): Use **"StudioAs Inc."** as the publisher name (optional).  
-- You may publish under your own name/organization if preferred.  
+### **4. Compliance Requirements**  
+- **License:** Include original [MIT License](LICENSE) and copyright notice.  
+- **Security:** Modifications must not introduce vulnerabilities (audits may be requested).  
+- **Branding:** Avoid implying StudioAs Inc. endorsement.  
 
-### **4. License Compliance**  
-- This project is licensed under the **MIT**.  
-- Any redistribution must include the **original license file** and copyright notice.  
+### **5. Violations & Enforcement**  
+- **First offense:** 30-day notice to rectify.  
+- **Repeat violations:** DMCA takedown and legal action.  
+- **Disputes:** Email [mashikahamed0@gmail.com](mailto:mashikahamed0@gmail.com) for arbitration.  
 
-### **5. Play Store Publishing**  
-- You may publish the app on Google Play under your account.  
-- Monetization (ads, subscriptions, etc.) is allowed **only if** it doesn’t degrade UX (subject to approval).  
+### **6. StudioAs Inc. Rights**  
+- Terminate permissions **with 30 days’ notice** for any reason.  
+- Change license terms **retroactively** (users must comply within 60 days).  
 
-### **Violations & Termination**  
-- Failure to comply may result in a **DMCA takedown** or removal from app stores.  
-- Disputes will be resolved through mutual discussion first.  
+---
 
----  
-
-### **Agreement**  
-By using this project, you acknowledge and accept these conditions.  
-
-**Original Developer:** [Ashik/StudioAs Inc.]  
-**License:** [MIT License]  
-**Effective Date:** [10/08/2025]
+**By redistributing Synapse, you agree to these terms.**  
+**Original Developer:** Ashik / StudioAs Inc.  
+**Contact:** [mashikahamed0@gmail.com](mailto:mashikahamed0@gmail.com)
