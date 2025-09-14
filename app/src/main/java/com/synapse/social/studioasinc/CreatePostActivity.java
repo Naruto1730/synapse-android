@@ -82,10 +82,13 @@ import java.util.regex.*;
 import org.json.*;
 import com.google.android.material.materialswitch.MaterialSwitch;
 import com.google.android.material.appbar.MaterialToolbar;
-import com.synapse.social.studioasinc.ImageUploader;
+import com.synapse.social.studioasinc.UploadFiles;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
 import android.content.ClipData;
+import androidx.core.app.NotificationCompat;
+import android.app.NotificationManager;
+import android.app.NotificationChannel;
 
 
 public class CreatePostActivity extends AppCompatActivity {
@@ -93,9 +96,11 @@ public class CreatePostActivity extends AppCompatActivity {
 	public final int REQ_CD_IMAGE_PICKER = 101;
 	
 	private FirebaseDatabase _firebase = FirebaseDatabase.getInstance();
-	private FirebaseStorage _firebase_storage = FirebaseStorage.getInstance();
 	
-	private ProgressDialog SynapseLoadingDialog;
+	private NotificationManager notificationManager;
+	private static final String UPLOAD_CHANNEL_ID = "upload_channel";
+	private static final int UPLOAD_NOTIFICATION_ID = 1; // Unique ID for the notification
+
 	private String UniquePostKey = "";
 	private HashMap<String, Object> PostSendMap = new HashMap<>();
 	private String selectedImagePath = "";
@@ -131,11 +136,38 @@ public class CreatePostActivity extends AppCompatActivity {
 		initialize(_savedInstanceState);
 		FirebaseApp.initializeApp(this);
 		
+		notificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
+		createUploadChannel();
+
 		if (ContextCompat.checkSelfPermission(this, Manifest.permission.READ_EXTERNAL_STORAGE) == PackageManager.PERMISSION_DENIED
 		|| ContextCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE) == PackageManager.PERMISSION_DENIED) {
 			ActivityCompat.requestPermissions(this, new String[] {Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.WRITE_EXTERNAL_STORAGE}, 1000);} else {
 			initializeLogic();
 		}
+	}
+
+	private void createUploadChannel() {
+		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+			NotificationChannel channel = new NotificationChannel(
+			UPLOAD_CHANNEL_ID,
+			"Uploads",
+			NotificationManager.IMPORTANCE_LOW
+			);
+			channel.setDescription("Shows file upload progress");
+			notificationManager.createNotificationChannel(channel);
+		}
+	}
+
+	private void showUploadProgressNotification(int progress) {
+		NotificationCompat.Builder builder = new NotificationCompat.Builder(this, UPLOAD_CHANNEL_ID)
+		.setSmallIcon(R.drawable.ic_file_upload_white)
+		.setContentTitle("Uploading Post")
+		.setContentText(progress + "%")
+		.setProgress(100, progress, false)
+		.setOngoing(true)
+		.setOnlyAlertOnce(true);
+
+		notificationManager.notify(UPLOAD_NOTIFICATION_ID, builder.build());
 	}
 
 	@Override
@@ -303,29 +335,35 @@ public class CreatePostActivity extends AppCompatActivity {
 	}
 	
 	private void _createPost() {
-		if (postDescriptionEditText.getText().toString().trim().equals("") && !hasImage) {
+		if (postDescriptionEditText.getText().toString().trim().isEmpty() && !hasImage) {
 			Toast.makeText(getApplicationContext(), "Please add some text or an image to your post", Toast.LENGTH_SHORT).show();
 			return;
 		}
 		
 		UniquePostKey = maindb.push().getKey();
-		_LoadingDialog(true);
 		
 		if (hasImage) {
-			// Upload image first, then create post
-			ImageUploader.uploadImage(selectedImagePath, new ImageUploader.UploadCallback() {
+			showUploadProgressNotification(0);
+			File file = new File(selectedImagePath);
+			UploadFiles.uploadFile(selectedImagePath, file.getName(), new UploadFiles.UploadCallback() {
 				@Override
-				public void onUploadComplete(String imageUrl) {
-					_savePostToDatabase(imageUrl);
+				public void onProgress(int percent) {
+					showUploadProgressNotification(percent);
+				}
+
+				@Override
+				public void onSuccess(String url, String publicId) {
+					notificationManager.cancel(UPLOAD_NOTIFICATION_ID);
+					_savePostToDatabase(url);
 				}
 				
 				@Override
-				public void onUploadError(String errorMessage) {
-					_LoadingDialog(false);
-					Toast.makeText(getApplicationContext(), "Failed to upload image: " + errorMessage, Toast.LENGTH_SHORT).show();
+				public void onFailure(String error) {
+					notificationManager.cancel(UPLOAD_NOTIFICATION_ID);
+					Toast.makeText(getApplicationContext(), "Upload failed: " + error, Toast.LENGTH_SHORT).show();
 				}
 			});
-		} else {
+			} else {
 			// Create text-only post
 			_savePostToDatabase(null);
 		}
@@ -340,7 +378,6 @@ public class CreatePostActivity extends AppCompatActivity {
 		FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
 		if (currentUser == null) {
 			Toast.makeText(getApplicationContext(), "User not logged in", Toast.LENGTH_SHORT).show();
-			_LoadingDialog(false);
 			return;
 		}
 		PostSendMap.put("uid", currentUser.getUid());
@@ -383,11 +420,9 @@ public class CreatePostActivity extends AppCompatActivity {
 				if (databaseError == null) {
 					_sendNotificationsToFollowers(UniquePostKey, postDescriptionEditText.getText().toString().trim());
 					Toast.makeText(getApplicationContext(), getResources().getString(R.string.post_publish_success), Toast.LENGTH_SHORT).show();
-					_LoadingDialog(false);
 					finish();
 				} else {
 					Toast.makeText(getApplicationContext(), databaseError.getMessage(), Toast.LENGTH_SHORT).show();
-					_LoadingDialog(false);
 				}
 			}
 		});
@@ -553,28 +588,4 @@ public class CreatePostActivity extends AppCompatActivity {
 		bottomSheetDialog.show();
 	}
 	
-	public void _LoadingDialog(final boolean _visibility) {
-		if (_visibility) {
-			if (SynapseLoadingDialog== null){
-				SynapseLoadingDialog = new ProgressDialog(this);
-				SynapseLoadingDialog.setCancelable(false);
-				SynapseLoadingDialog.setCanceledOnTouchOutside(false);
-				
-				SynapseLoadingDialog.requestWindowFeature(Window.FEATURE_NO_TITLE); 
-				SynapseLoadingDialog.getWindow().setBackgroundDrawable(new android.graphics.drawable.ColorDrawable(Color.TRANSPARENT));
-				
-			}
-			SynapseLoadingDialog.show();
-			SynapseLoadingDialog.setContentView(R.layout.loading_synapse);
-			
-			LinearLayout loading_bar_layout = (LinearLayout)SynapseLoadingDialog.findViewById(R.id.loading_bar_layout);
-			
-			
-			//loading_bar_layout.setBackground(new GradientDrawable() { public GradientDrawable getIns(int a, int b) { this.setCornerRadius(a); this.setColor(b); return this; } }.getIns((int)100, 0xFFFFFFFF));
-		} else {
-			if (SynapseLoadingDialog != null){
-				SynapseLoadingDialog.dismiss();
-			}
-		}
-	}
 }
