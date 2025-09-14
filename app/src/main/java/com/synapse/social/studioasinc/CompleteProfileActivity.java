@@ -80,7 +80,10 @@ import java.util.HashMap;
 import java.util.regex.*;
 import org.json.*;
 import com.google.firebase.database.Query;
-import com.synapse.social.studioasinc.ImageUploader;
+import com.synapse.social.studioasinc.ImageUploader;
+import com.onesignal.OneSignal;
+import com.onesignal.user.subscriptions.IPushSubscriptionObserver;
+import com.onesignal.user.subscriptions.PushSubscriptionChangedState;
 
 public class CompleteProfileActivity extends AppCompatActivity {
 	
@@ -495,6 +498,7 @@ createUserMap.put("banned", "false");
 createUserMap.put("gender", "hidden");
 createUserMap.put("status", "online");
 createUserMap.put("join_date", String.valueOf((long)(getJoinTime.getTimeInMillis())));
+addOneSignalPlayerIdToMap(createUserMap);
 main.child("users").child(FirebaseAuth.getInstance().getCurrentUser().getUid()).updateChildren(createUserMap, new DatabaseReference.CompletionListener() {
 	@Override
 	public void onComplete(DatabaseError databaseError, DatabaseReference databaseReference) {
@@ -611,6 +615,7 @@ username_input.setEnabled(false);
 				createUserMap.put("gender", "hidden");
 				createUserMap.put("status", "online");
 				createUserMap.put("join_date", String.valueOf((long)(getJoinTime.getTimeInMillis())));
+				addOneSignalPlayerIdToMap(createUserMap);
 				main.child("users").child(FirebaseAuth.getInstance().getCurrentUser().getUid()).updateChildren(createUserMap, new DatabaseReference.CompletionListener() {
 					@Override
 					public void onComplete(DatabaseError databaseError, DatabaseReference databaseReference) {
@@ -1133,6 +1138,16 @@ username_input.setEnabled(false);
 		title.setTypeface(Typeface.DEFAULT, 1);
 	}
 	
+	private void addOneSignalPlayerIdToMap(HashMap<String, Object> userMap) {
+		// Get current OneSignal Player ID if available
+		if (OneSignal.getUser().getPushSubscription().getOptedIn()) {
+			String playerId = OneSignal.getUser().getPushSubscription().getId();
+			if (playerId != null && !playerId.isEmpty()) {
+				userMap.put("oneSignalPlayerId", playerId);
+			}
+		}
+	}
+	
 	
 	public void _pushdata() {
 		if (userNameErr) {
@@ -1178,6 +1193,7 @@ username_input.setEnabled(false);
 				createUserMap.put("banned", "false");
 				createUserMap.put("status", "online");
 				createUserMap.put("join_date", String.valueOf((long)(getJoinTime.getTimeInMillis())));
+				addOneSignalPlayerIdToMap(createUserMap);
 				main.child("users").child(FirebaseAuth.getInstance().getCurrentUser().getUid()).updateChildren(createUserMap, new DatabaseReference.CompletionListener() {
 					@Override
 					public void onComplete(DatabaseError databaseError, DatabaseReference databaseReference) {
@@ -1244,6 +1260,7 @@ username_input.setEnabled(false);
 				createUserMap.put("banned", "false");
 				createUserMap.put("status", "online");
 				createUserMap.put("join_date", String.valueOf((long)(getJoinTime.getTimeInMillis())));
+				addOneSignalPlayerIdToMap(createUserMap);
 				main.child("users").child(FirebaseAuth.getInstance().getCurrentUser().getUid()).updateChildren(createUserMap, new DatabaseReference.CompletionListener() {
 					@Override
 					public void onComplete(DatabaseError databaseError, DatabaseReference databaseReference) {

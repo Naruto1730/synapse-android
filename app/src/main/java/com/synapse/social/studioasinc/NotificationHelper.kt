@@ -207,7 +207,7 @@ object NotificationHelper {
         
         try {
             jsonBody.put("app_id", NotificationConfig.ONESIGNAL_APP_ID)
-            jsonBody.put("include_player_ids", JSONObject().put("0", recipientPlayerId))
+            jsonBody.put("include_player_ids", arrayOf(recipientPlayerId))
             jsonBody.put("contents", JSONObject().put("en", message))
             jsonBody.put("headings", JSONObject().put("en", NotificationConfig.getTitleForNotificationType(notificationType)))
             jsonBody.put("subtitle", JSONObject().put("en", NotificationConfig.NOTIFICATION_SUBTITLE))
@@ -221,6 +221,14 @@ object NotificationHelper {
                 data?.forEach { (key, value) ->
                     dataJson.put(key, value)
                 }
+                
+                // Add deep link URL based on notification type
+                val deepLinkUrl = generateDeepLinkUrl(notificationType, senderUid, data)
+                if (deepLinkUrl.isNotEmpty()) {
+                    jsonBody.put("url", deepLinkUrl)
+                    dataJson.put("deep_link", deepLinkUrl)
+                }
+                
                 jsonBody.put("data", dataJson)
             }
             
@@ -291,6 +299,58 @@ object NotificationHelper {
     @JvmStatic
     fun isNotificationSystemConfigured(): Boolean {
         return NotificationConfig.isConfigurationValid()
+    }
+
+    /**
+     * Generates a deep link URL based on notification type and data.
+     * @param notificationType The type of notification
+     * @param senderUid The sender's UID (optional)
+     * @param data Additional notification data (optional)
+     * @return Deep link URL string
+     */
+    @JvmStatic
+    private fun generateDeepLinkUrl(
+        notificationType: String, 
+        senderUid: String?, 
+        data: Map<String, String>?
+    ): String {
+        return when (notificationType) {
+            "chat_message" -> {
+                if (!senderUid.isNullOrBlank()) {
+                    val chatId = data?.get("chat_id")
+                    if (!chatId.isNullOrBlank()) {
+                        "synapse://chat?uid=$senderUid&chatId=$chatId"
+                    } else {
+                        "synapse://chat?uid=$senderUid"
+                    }
+                } else ""
+            }
+            NotificationConfig.NOTIFICATION_TYPE_NEW_POST,
+            NotificationConfig.NOTIFICATION_TYPE_NEW_LIKE_POST -> {
+                if (!senderUid.isNullOrBlank()) {
+                    val postId = data?.get("postId")
+                    if (!postId.isNullOrBlank()) {
+                        "synapse://profile?uid=$senderUid&postId=$postId"
+                    } else {
+                        "synapse://profile?uid=$senderUid"
+                    }
+                } else ""
+            }
+            NotificationConfig.NOTIFICATION_TYPE_NEW_COMMENT,
+            NotificationConfig.NOTIFICATION_TYPE_NEW_REPLY,
+            NotificationConfig.NOTIFICATION_TYPE_NEW_LIKE_COMMENT -> {
+                val postId = data?.get("postId")
+                val commentId = data?.get("commentId")
+                if (!postId.isNullOrBlank()) {
+                    if (!commentId.isNullOrBlank()) {
+                        "synapse://home?postId=$postId&commentId=$commentId"
+                    } else {
+                        "synapse://home?postId=$postId"
+                    }
+                } else ""
+            }
+            else -> "synapse://home"
+        }
     }
 
     // Removed saveNotificationToDatabase function as Firebase RDB chat notifications are no longer needed

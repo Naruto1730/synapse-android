@@ -140,11 +140,8 @@ public class HomeActivity extends AppCompatActivity {
         });
 
         settings_button.setOnClickListener(_view -> {
-            FirebaseAuth.getInstance().signOut();
-            Intent intent = new Intent(HomeActivity.this, AuthActivity.class);
-            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+            Intent intent = new Intent(HomeActivity.this, CreatePostActivity.class);
             startActivity(intent);
-            finish();
         });
 
         DatabaseReference getReference = udb.child(FirebaseAuth.getInstance().getCurrentUser().getUid());

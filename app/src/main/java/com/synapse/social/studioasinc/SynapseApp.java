@@ -85,6 +85,9 @@ public class SynapseApp extends Application implements DefaultLifecycleObserver 
         OneSignal.getDebug().setLogLevel(LogLevel.VERBOSE);
         OneSignal.initWithContext(this, ONESIGNAL_APP_ID);
 
+        // Set up notification click handler for in-app navigation
+        OneSignal.getNotifications().addClickListener(new NotificationClickHandler());
+
         // Add a subscription observer to get the Player ID and save it to Firestore
         OneSignal.getUser().getPushSubscription().addObserver(new IPushSubscriptionObserver() {
             @Override

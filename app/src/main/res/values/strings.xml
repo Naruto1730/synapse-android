@@ -93,6 +93,14 @@
     <string name="hours_ago">hours ago</string>
     <string name="days_ago">days ago</string>
     <string name="create_post">Create Post</string>
+    <string name="whats_on_your_mind">What\'s on your mind?</string>
+    <string name="photo">Photo</string>
+    <string name="video">Video</string>
+    <string name="post_settings">Post Settings</string>
+    <string name="post_visibility">Post Visibility</string>
+    <string name="hide_views_count">Hide views count</string>
+    <string name="hide_like_count">Hide like count</string>
+    <string name="hide_comments_count">Hide comments count</string>
     <string name="create_complete_post_details">Complete post details</string>
     <string name="create_complete_post_description">Post description</string>
     <string name="debug_subtitle">We are sad! An error has occurred in the application, please report this error to us. We will try to fix it.</string>

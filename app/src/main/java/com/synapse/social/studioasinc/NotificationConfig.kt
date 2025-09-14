@@ -16,7 +16,7 @@ object NotificationConfig {
     // ===== ONESIGNAL CONFIGURATION =====
     // OneSignal credentials
     const val ONESIGNAL_APP_ID = "044e1911-6911-4871-95f9-d60003002fe2"
-    const val ONESIGNAL_REST_API_KEY = "os_v2_app_arhbseljcfehdfpz2yaagabp4kjpeii7jqvuervkkbv3awuu5euhxb2wgadx2omvk5lpkjqzbw54hjfgnfsijpzjwwlk6l3g4pw3zmy"
+    const val ONESIGNAL_REST_API_KEY = "os_v2_app_arhbseljcfehdfpz2yaagabp4kjpeii7jqvuervkkbv3awuu5eubewbry5wc7dy2lg7qs6dtocainw2tyoqwfyde5ilbdj5e7ys2yaq"
     
     // ===== NOTIFICATION SETTINGS =====
     const val NOTIFICATION_TITLE = "New Message"

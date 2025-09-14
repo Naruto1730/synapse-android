@@ -159,6 +159,7 @@
     <!-- Additional missing colors -->
     <color name="shimmer_placeholder">#DDDDDD</color>
     <color name="pureWhite">#FFFFFF</color>
+    <color name="white">#FFFFFF</color>
     <color name="bars_colors">@color/md_theme_surfaceContainerLow</color>
     <color name="semi_trans">#80FFFFFF</color>
 </resources>

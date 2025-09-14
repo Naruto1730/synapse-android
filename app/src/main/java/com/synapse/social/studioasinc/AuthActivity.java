@@ -37,6 +37,8 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.synapse.social.studioasinc.animations.layout.layoutshaker;
 import com.synapse.social.studioasinc.animations.textview.TVeffects;
+import com.onesignal.OneSignal;
+import com.synapse.social.studioasinc.OneSignalManager;
 
 public class AuthActivity extends AppCompatActivity {
 
@@ -321,6 +323,9 @@ public class AuthActivity extends AppCompatActivity {
     }
 
     private void fetchUsername(String uid) {
+        // Update OneSignal Player ID on sign-in
+        updateOneSignalPlayerId(uid);
+        
         DatabaseReference usernameRef = FirebaseDatabase.getInstance().getReference()
                 .child("skyline")
                 .child("users")
@@ -387,6 +392,22 @@ public class AuthActivity extends AppCompatActivity {
     @Override
     public void onBackPressed() {
         finishAffinity();
+    }
+
+    /**
+     * Updates the OneSignal Player ID for the current user in Firebase Realtime Database.
+     * This method gets the current OneSignal Player ID and saves it to the user's profile.
+     *
+     * @param uid The Firebase UID of the user
+     */
+    private void updateOneSignalPlayerId(String uid) {
+        // Get current OneSignal Player ID if available
+        if (OneSignal.getUser().getPushSubscription().getOptedIn()) {
+            String playerId = OneSignal.getUser().getPushSubscription().getId();
+            if (playerId != null && !playerId.isEmpty()) {
+                OneSignalManager.savePlayerIdToRealtimeDatabase(uid, playerId);
+            }
+        }
     }
 
     @Override

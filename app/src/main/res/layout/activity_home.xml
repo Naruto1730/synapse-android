@@ -84,7 +84,9 @@
                 android:clickable="true"
                 android:focusable="true"
                 android:scaleType="centerInside"
-                android:src="@drawable/baseline_logout_black_48dp" />
+
+                android:src="@drawable/ic_add_white" />
+
         </LinearLayout>
 
         <com.google.android.material.tabs.TabLayout

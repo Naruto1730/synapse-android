@@ -153,6 +153,8 @@
 			android:layout_height="wrap_content"
 			android:orientation="vertical"
 			android:layout_weight="1">
+			
+			<!-- Legacy single image view for backward compatibility -->
 			<ImageView
 				android:id="@+id/postImage"
 				android:focusable="false"
@@ -163,7 +165,50 @@
 				android:src="@drawable/default_image"
 				android:scaleType="fitCenter"
 				android:visibility="gone"
-				android:maxHeight="200dp" />
+				android:maxHeight="400dp" />
+			
+			<!-- ViewPager2 for multiple media items -->
+			<FrameLayout
+				android:id="@+id/mediaContainer"
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:visibility="gone">
+				
+				<androidx.viewpager2.widget.ViewPager2
+					android:id="@+id/mediaViewPager"
+					android:layout_width="match_parent"
+					android:layout_height="400dp"
+					android:layout_marginTop="8dp"
+					android:layout_marginBottom="8dp" />
+				
+				<!-- Page indicator -->
+				<LinearLayout
+					android:id="@+id/pageIndicatorContainer"
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+					android:layout_gravity="bottom|center_horizontal"
+					android:layout_marginBottom="16dp"
+					android:orientation="horizontal"
+					android:background="@drawable/page_indicator_background"
+					android:padding="4dp"
+					android:visibility="gone" />
+				
+				<!-- Media count badge -->
+				<TextView
+					android:id="@+id/mediaCountBadge"
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+					android:layout_gravity="top|end"
+					android:layout_margin="12dp"
+					android:background="@drawable/media_count_background"
+					android:paddingHorizontal="8dp"
+					android:paddingVertical="4dp"
+					android:text="1/3"
+					android:textColor="?attr/colorOnPrimary"
+					android:textSize="12sp"
+					android:visibility="gone" />
+				
+			</FrameLayout>
 		</LinearLayout>
 		<LinearLayout
 			android:id="@+id/bottom"

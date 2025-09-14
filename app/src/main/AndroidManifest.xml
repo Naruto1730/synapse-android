@@ -32,7 +32,18 @@
 			android:configChanges="orientation|screenSize|keyboardHidden|smallestScreenSize|screenLayout"
 			android:hardwareAccelerated="true"
 			android:supportsPictureInPicture="true"
-			android:windowSoftInputMode="stateHidden" />
+			android:windowSoftInputMode="stateHidden"
+			android:launchMode="singleTop"
+			android:exported="true">
+			<!-- Deep link for general home navigation -->
+			<intent-filter android:autoVerify="true">
+				<action android:name="android.intent.action.VIEW" />
+				<category android:name="android.intent.category.DEFAULT" />
+				<category android:name="android.intent.category.BROWSABLE" />
+				<data android:scheme="synapse"
+					  android:host="home" />
+			</intent-filter>
+		</activity>
 		<activity
 			android:name=".SearchActivity"
 			android:configChanges="orientation|screenSize|keyboardHidden|smallestScreenSize|screenLayout"
@@ -53,7 +64,18 @@
 			android:hardwareAccelerated="true"
 			android:supportsPictureInPicture="true"
 			android:screenOrientation="portrait"
-			android:windowSoftInputMode="stateHidden" />
+			android:windowSoftInputMode="stateHidden"
+			android:launchMode="singleTop"
+			android:exported="true">
+			<!-- Deep link for profile notifications -->
+			<intent-filter android:autoVerify="true">
+				<action android:name="android.intent.action.VIEW" />
+				<category android:name="android.intent.category.DEFAULT" />
+				<category android:name="android.intent.category.BROWSABLE" />
+				<data android:scheme="synapse"
+					  android:host="profile" />
+			</intent-filter>
+		</activity>
 		<activity
 			android:name=".ProfileEditActivity"
 			android:configChanges="orientation|screenSize|keyboardHidden|smallestScreenSize|screenLayout"
@@ -127,7 +149,18 @@
 			android:hardwareAccelerated="true"
 			android:supportsPictureInPicture="true"
 			android:screenOrientation="portrait"
-			android:windowSoftInputMode="stateHidden" />
+			android:windowSoftInputMode="stateHidden"
+			android:launchMode="singleTop"
+			android:exported="true">
+			<!-- Deep link for chat notifications -->
+			<intent-filter android:autoVerify="true">
+				<action android:name="android.intent.action.VIEW" />
+				<category android:name="android.intent.category.DEFAULT" />
+				<category android:name="android.intent.category.BROWSABLE" />
+				<data android:scheme="synapse"
+					  android:host="chat" />
+			</intent-filter>
+		</activity>
 		<activity
 			android:name=".ImageGalleryActivity"
 			android:configChanges="orientation|screenSize|keyboardHidden|smallestScreenSize|screenLayout"

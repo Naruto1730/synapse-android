@@ -37,11 +37,19 @@ android {
     useLibrary 'org.apache.http.legacy'
 
     signingConfigs {
-        release {
-            storeFile = file(keystoreProperties['storeFile'])
-            storePassword = keystoreProperties['storePassword']
-            keyAlias = keystoreProperties['keyAlias']
-            keyPassword = keystoreProperties['keyPassword']
+        debug {
+            // Use default debug keystore
+        }
+        if (keystorePropertiesFile.exists() && keystoreProperties['storeFile'] != null) {
+            def keystoreFile = rootProject.file(keystoreProperties['storeFile'])
+            if (keystoreFile.exists()) {
+                release {
+                    storeFile keystoreFile
+                    storePassword keystoreProperties['storePassword']
+                    keyAlias keystoreProperties['keyAlias']
+                    keyPassword keystoreProperties['keyPassword']
+                }
+            }
         }
     }
 
@@ -65,7 +73,11 @@ android {
             minifyEnabled = false
             shrinkResources = false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
-            signingConfig = signingConfigs.release
+            if (signingConfigs.hasProperty('release')) {
+                signingConfig = signingConfigs.release
+            } else {
+                signingConfig = signingConfigs.debug
+            }
         }
         debug {
             applicationIdSuffix = ".debug"
@@ -186,6 +198,10 @@ dependencies {
     implementation 'io.noties.markwon:ext-strikethrough:4.6.2'
     implementation 'io.noties.markwon:ext-latex:4.6.2'
     implementation 'io.noties.markwon:html:4.6.2'
+
+    // ExoPlayer for video playback
+    implementation 'com.google.android.exoplayer:exoplayer:2.19.1'
+    implementation 'com.google.android.exoplayer:exoplayer-ui:2.19.1'
 
     // Testing
 }
